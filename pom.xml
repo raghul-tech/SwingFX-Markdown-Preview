@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.github.raghul-tech</groupId>
+  <artifactId>swingfx-markdown-preview-parent</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+   <name>SwingFX Markdown Preview Parent</name>
+  <description>
+A Java library for rendering Markdown in Swing and JavaFX hybrid applications. Provides live preview panels, windows, and tabbed panes with theme switching, file change detection, emoji support, and HTML export. 
+Swing developers can use this library by including Flexmark and JavaFX dependencies or by using the -all module for a complete setup with JavaFXPanel.
+</description>
+
+
+  <url>https://github.com/raghul-tech/SwingFX-Markdown-Preview</url>
+
+<organization>
+  <name>Raghul-tech</name>
+  <url>https://github.com/raghul-tech</url>
+</organization>
+
+
+  <modules>
+    <module>swingfx-markdown-preview</module>
+     <module>swingfx-markdown-preview-flexmark</module>
+    <module>swingfx-markdown-preview-all</module>
+  </modules>
+
+<licenses>
+  <license>
+    <name>The MIT License</name>
+    <url>https://opensource.org/licenses/MIT</url>
+    <distribution>repo</distribution>
+  </license>
+</licenses>
+
+<scm>
+  <connection>scm:git:https://github.com/raghul-tech/SwingFX-Markdown-Preview.git</connection>
+  <developerConnection>scm:git:ssh://git@github.com/raghul-tech/SwingFX-Markdown-Preview.git</developerConnection>
+  <url>https://github.com/raghul-tech/SwingFX-Markdown-Preview</url>
+  <tag>v1.0.0</tag>
+</scm>
+
+<developers>
+  <developer>
+    <id>raghul-tech</id>
+    <name>Raghul-tech</name>
+    <email>raghultech.app@gmail.com</email>
+  </developer>
+</developers>
+
+<distributionManagement>
+  <repository>
+    <id>ossrh</id>
+    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  </repository>
+  <snapshotRepository>
+    <id>ossrh</id>
+    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+  </snapshotRepository>
+</distributionManagement>
+
+
+  <properties>
+    <java.version>17</java.version>
+    <javafx.version>17</javafx.version>
+  </properties>
+
+ <build>
+    <plugins>
+      <!-- Maven Compiler -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <release>${java.version}</release>
+        </configuration>
+      </plugin>
+
+      <!-- Maven GPG -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals><goal>sign</goal></goals>
+          </execution>
+        </executions>
+        <configuration>
+          <useAgent>true</useAgent>
+        </configuration>
+      </plugin>
+
+      <!-- Central Publishing -->
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.7.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>central</publishingServerId>
+          <autoPublish>true</autoPublish>
+          <waitUntil>published</waitUntil>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
