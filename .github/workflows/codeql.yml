@@ -30,6 +30,8 @@ jobs:
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
+          # Only analyze source code without building
+          build-mode: none 
 
       - name: ☕ Set up JDK
         uses: actions/setup-java@v3
@@ -37,8 +39,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: 🛠️ Build project with Maven
-        run: mvn clean install
+      - name: 🛠️ Build project for analysis (skip signing)
+        run: mvn clean compile test-compile -Dgpg.skip=true -DskipTests=true
 
       - name: 🧠 Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+        with:
+          # Only analyze when there are results
+          skip-if-no-results: true
